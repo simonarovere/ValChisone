@@ -1,0 +1,919 @@
+@prefix : <http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#vann> .
+@prefix ValChisone: <http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#> .
+@base <http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#> .
+
+<http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone> rdf:type owl:Ontology ;
+                                                                   owl:imports <http://www.ontologydesignpatterns.org/schemas/cpannotationschema.owl> ;
+                                                                   dc:creator "Simona Rovere" ;
+                                                                   dc:date "12/02/2024" ;
+                                                                   dc:description "L'onotologia vuole essere una basilare guida per le escursioni in montagna nella Val Chisone" ;
+                                                                   dc:title "Guida Escursionistica ValChisone" ;
+                                                                   ValChisone:vann:preferredNamespacePrefix "ValChisone" ;
+                                                                   rdfs:label "ValChisone" .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/dc/elements/1.1/creator
+dc:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/date
+dc:date rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/description
+dc:description rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/dc/elements/1.1/title
+dc:title rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#vann:preferredNamespacePrefix
+ValChisone:vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#vann:preferredNamespaceUri
+ValChisone:vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#Concept
+skos:Concept rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#broader
+skos:broader rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#narrower
+skos:narrower rdf:type owl:AnnotationProperty .
+
+
+###  http://www.w3.org/2004/02/skos/core#prefLabel
+skos:prefLabel rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://purl.org/vocab/vann/siTrovaIn
+<http://purl.org/vocab/vann/siTrovaIn> rdf:type owl:ObjectProperty ,
+                                                owl:FunctionalProperty ;
+                                       rdfs:domain ValChisone:ParcoNaturale ;
+                                       rdfs:range ValChisone:Valle .
+
+
+###  http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf
+<http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl#isMemberOf> rdf:type owl:ObjectProperty ;
+                                                                               rdfs:domain ValChisone:Attrezzo ;
+                                                                               rdfs:range ValChisone:Collection ;
+                                                                               rdfs:comment "relazione del pattern Collection. Un attrezzo è un memebro della Collection" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#arrivaA
+ValChisone:arrivaA rdf:type owl:ObjectProperty ,
+                            owl:TransitiveProperty ;
+                   rdfs:domain ValChisone:Percorso ;
+                   rdfs:range ValChisone:Destinazione ;
+                   rdfs:comment "Percorso porta a una Destinazione" ;
+                   rdfs:label "arrivaA" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#comprende
+ValChisone:comprende rdf:type owl:ObjectProperty ;
+                     rdfs:domain ValChisone:Escursione ;
+                     rdfs:range ValChisone:Percorso ;
+                     rdfs:comment "Escursione comprende un certo Percorso" ;
+                     rdfs:label "comprende" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#comprendeVetta
+ValChisone:comprendeVetta rdf:type owl:ObjectProperty ;
+                          owl:inverseOf ValChisone:faParteCatena ;
+                          rdfs:domain ValChisone:CatenaMontuosa ;
+                          rdfs:range ValChisone:Vetta ;
+                          rdfs:comment "Una Catena Montuosa comprende una (o più) vette" ;
+                          rdfs:label "comprendeVetta" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#contiene
+ValChisone:contiene rdf:type owl:ObjectProperty ;
+                    rdfs:domain ValChisone:Percorso ;
+                    rdfs:range ValChisone:Fontana ;
+                    rdfs:comment "il Percorso può contenere una fontana" ;
+                    rdfs:label "contiene" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#esegue
+ValChisone:esegue rdf:type owl:ObjectProperty ;
+                  owl:inverseOf ValChisone:eseguitaDa ;
+                  rdfs:domain ValChisone:Escursionista ;
+                  rdfs:range ValChisone:Escursione ;
+                  rdfs:comment "L'Escursionista esegue una Escursione" ;
+                  rdfs:label "esegue" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#eseguitaDa
+ValChisone:eseguitaDa rdf:type owl:ObjectProperty ;
+                      rdfs:domain ValChisone:Escursione ;
+                      rdfs:range ValChisone:Escursionista ;
+                      rdfs:comment "inverso di esegue." ;
+                      rdfs:label "eseguitaDa" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#faParteCatena
+ValChisone:faParteCatena rdf:type owl:ObjectProperty ,
+                                  owl:FunctionalProperty ;
+                         rdfs:domain ValChisone:Vetta ;
+                         rdfs:range ValChisone:CatenaMontuosa ;
+                         rdfs:comment "una Vetta fa parte di una Catena Montuosa" ;
+                         rdfs:label "faParteCatena" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#faParteParco
+ValChisone:faParteParco rdf:type owl:ObjectProperty ,
+                                 owl:SymmetricProperty ;
+                        rdfs:domain ValChisone:Destinazione ;
+                        rdfs:range ValChisone:ParcoNaturale ;
+                        rdfs:comment "la Destinazione fa parte (o meno) di un ParcoNaturale" ;
+                        rdfs:label "faParteParco" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haDestinazione
+ValChisone:haDestinazione rdf:type owl:ObjectProperty ;
+                          rdfs:subPropertyOf owl:topObjectProperty ;
+                          owl:propertyChainAxiom ( ValChisone:comprende
+                                                   ValChisone:arrivaA
+                                                 ) .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haDifficoltà
+ValChisone:haDifficoltà rdf:type owl:ObjectProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain ValChisone:Escursione ;
+                        rdfs:range ValChisone:Difficoltà ;
+                        rdfs:comment "L'Escursione ha un certo livello di difficoltà" ;
+                        rdfs:label "haDifficoltà" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#hasMember
+ValChisone:hasMember rdf:type owl:ObjectProperty ;
+                     rdfs:domain ValChisone:Collection ;
+                     rdfs:range ValChisone:Attrezzo ;
+                     rdfs:comment "relazione del pattern Collection. La Collection ha dei membri" ;
+                     rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl> ;
+                     rdfs:label "hasMember" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#isLocationOf
+ValChisone:isLocationOf rdf:type owl:ObjectProperty ;
+                        rdfs:domain ValChisone:ParcoNaturale ;
+                        rdfs:range ValChisone:Destinazione ;
+                        rdfs:comment "relazione del pattern Place. Il Parco Naturale è locazione di una Destinazione" ;
+                        rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/cp/owl/place.owl> .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#necessitaAttrezzatura
+ValChisone:necessitaAttrezzatura rdf:type owl:ObjectProperty ,
+                                          owl:FunctionalProperty ;
+                                 rdfs:domain ValChisone:Percorso ;
+                                 rdfs:range ValChisone:Equipaggiamento ;
+                                 rdfs:comment "Il tipo di Percorso necessità un tipo specifico di attrezzatura" ;
+                                 rdfs:label "necessitaAttrezzatura" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ospita
+ValChisone:ospita rdf:type owl:ObjectProperty ;
+                  rdfs:domain ValChisone:Valle ;
+                  rdfs:range ValChisone:Animali ;
+                  rdfs:comment "Nella Valle è possibile ospitare certi animali" ;
+                  rdfs:label "ospita" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#parteDa
+ValChisone:parteDa rdf:type owl:ObjectProperty ;
+                   rdfs:domain ValChisone:Percorso ;
+                   rdfs:range ValChisone:LocalitàPartenza ;
+                   rdfs:comment "Il Percorso ha un punto di partenza, un paese o località" ;
+                   rdfs:label "parteDa" .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haAltitudine
+ValChisone:haAltitudine rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain ValChisone:Destinazione ;
+                        rdfs:range xsd:integer ;
+                        rdfs:comment "La Destinazione si trova ad una certa altitudine" ;
+                        rdfs:label "haAltitudine" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haDislivello
+ValChisone:haDislivello rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain ValChisone:Escursione ;
+                        rdfs:range xsd:integer ;
+                        rdfs:comment "l'Escursione ha un certo dislivello dalla partenza all'arrivo" ;
+                        rdfs:label "haDislivello" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haEtà
+ValChisone:haEtà rdf:type owl:DatatypeProperty ,
+                          owl:FunctionalProperty ;
+                 rdfs:domain ValChisone:Escursionista ;
+                 rdfs:range xsd:integer ;
+                 rdfs:comment "Età della persona che effettua l'escursione" ;
+                 rdfs:label "haEtà" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#haTempoPercorrenza
+ValChisone:haTempoPercorrenza rdf:type owl:DatatypeProperty ,
+                                       owl:FunctionalProperty ;
+                              rdfs:domain ValChisone:Escursione ;
+                              rdfs:range xsd:decimal ;
+                              rdfs:comment "Tempo impiegato per compiere l'escursione" ;
+                              rdfs:label "haTempoPercorrenza" .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Animali
+ValChisone:Animali rdf:type owl:Class ;
+                   rdfs:comment "Animale che è possibile avvistare durante l'escursione" ;
+                   rdfs:label "Animale" ;
+                   rdfs:seeAlso <https://dbpedia.org/ontology/Animal> .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Arrampicata
+ValChisone:Arrampicata rdf:type owl:Class ;
+                       rdfs:subClassOf ValChisone:Percorso ;
+                       rdfs:comment "Via per arrivare in cima a una montagna attraverso una parete rocciosa" ;
+                       rdfs:label "Arrampicata" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Attrezzo
+ValChisone:Attrezzo rdf:type owl:Class ;
+                    rdfs:comment "Attrezzo necessario per l'escursione" ;
+                    rdfs:label "Attrezzo" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#CatenaMontuosa
+ValChisone:CatenaMontuosa rdf:type owl:Class ;
+                          rdfs:comment "Gruppo di montagne facenti parte del medesimo sistema montuoso geologico" ;
+                          rdfs:label "CatenaMontuosa" ;
+                          rdfs:seeAlso <https://dbpedia.org/page/Mountain_range> .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Collection
+ValChisone:Collection rdf:type owl:Class ;
+                      rdfs:comment "Any container for entities that share one or more common properties" ;
+                      rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/cp/owl/collectionentity.owl> ;
+                      rdfs:label "Collection" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Destinazione
+ValChisone:Destinazione rdf:type owl:Class ;
+                        rdfs:subClassOf owl:Thing ;
+                        rdfs:comment "Destinazione del percorso" ;
+                        rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/cp/owl/place.owl> ;
+                        rdfs:label "Destinazione" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Difficile
+ValChisone:Difficile rdf:type owl:Class ;
+                     owl:equivalentClass [ rdf:type owl:Class ;
+                                           owl:oneOf ( ValChisone:EAI
+                                                       ValChisone:EEA-D
+                                                       ValChisone:EEA-PD
+                                                     )
+                                         ] ;
+                     rdfs:subClassOf ValChisone:Difficoltà ;
+                     rdfs:comment "Livello di difficoltà alto, comprende ferrate difficilii e persorsi innevati, livelli EEA-PD, EEA-D, EAI" ;
+                     rdfs:label "Difficile" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Difficoltà
+ValChisone:Difficoltà rdf:type owl:Class ;
+                      rdfs:comment "Livello di difficoltà dell'escursione" ;
+                      rdfs:label "Difficoltà" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Equipaggiamento
+ValChisone:Equipaggiamento rdf:type owl:Class ;
+                           rdfs:subClassOf ValChisone:Collection ;
+                           rdfs:comment "E' una collection di attrezzi" ;
+                           rdfs:label "Equipaggiamento" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Escursione
+ValChisone:Escursione rdf:type owl:Class ;
+                      owl:equivalentClass [ rdf:type owl:Restriction ;
+                                            owl:onProperty ValChisone:eseguitaDa ;
+                                            owl:someValuesFrom ValChisone:Escursionista
+                                          ] ,
+                                          [ rdf:type owl:Restriction ;
+                                            owl:onProperty ValChisone:comprende ;
+                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                            owl:onClass ValChisone:Percorso
+                                          ] ;
+                      rdfs:comment "Gita in un luogo di montagna che implica lo spostamento a piedi" ;
+                      rdfs:label "Escursione" ;
+                      rdfs:seeAlso "https://dbpedia.org/page/Hiking" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursioneDifficile
+ValChisone:EscursioneDifficile rdf:type owl:Class ;
+                               owl:equivalentClass [ rdf:type owl:Class ;
+                                                     owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty ValChisone:comprende ;
+                                                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                     owl:onClass ValChisone:Arrampicata
+                                                                   ]
+                                                                   [ rdf:type owl:Restriction ;
+                                                                     owl:onProperty ValChisone:haDislivello ;
+                                                                     owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                          owl:onDatatype xsd:integer ;
+                                                                                          owl:withRestrictions ( [ xsd:minExclusive 1600
+                                                                                                                 ]
+                                                                                                               )
+                                                                                        ]
+                                                                   ]
+                                                                 )
+                                                   ] ;
+                               rdfs:subClassOf ValChisone:Escursione ;
+                               owl:disjointWith ValChisone:EscursioneFacile ;
+                               rdfs:comment "Escursione lunga su ferrata o che richiede l'arrampicata" ;
+                               rdfs:label "EscursioneDifficile" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursioneFacile
+ValChisone:EscursioneFacile rdf:type owl:Class ;
+                            owl:equivalentClass [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty ValChisone:comprende ;
+                                                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                         owl:onClass ValChisone:SentieroBattuto
+                                                                       ]
+                                                                       [ rdf:type owl:Restriction ;
+                                                                         owl:onProperty ValChisone:haDislivello ;
+                                                                         owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                              owl:onDatatype xsd:integer ;
+                                                                                              owl:withRestrictions ( [ xsd:maxExclusive 500
+                                                                                                                     ]
+                                                                                                                   )
+                                                                                            ]
+                                                                       ]
+                                                                     ) ;
+                                                  rdf:type owl:Class
+                                                ] ;
+                            rdfs:subClassOf ValChisone:Escursione ;
+                            rdfs:comment "Escursione breve su sentiero semplice" ;
+                            rdfs:label "EscursioneFacile" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursioneMedia
+ValChisone:EscursioneMedia rdf:type owl:Class ;
+                           owl:equivalentClass [ rdf:type owl:Class ;
+                                                 owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty ValChisone:comprende ;
+                                                                                        owl:someValuesFrom ValChisone:SentieroBattuto
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty ValChisone:haDislivello ;
+                                                                                        owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                                             owl:onDatatype xsd:integer ;
+                                                                                                             owl:withRestrictions ( [ xsd:minExclusive 500
+                                                                                                                                    ]
+                                                                                                                                    [ xsd:maxExclusive 1600
+                                                                                                                                    ]
+                                                                                                                                  )
+                                                                                                           ]
+                                                                                      ]
+                                                                                    ) ;
+                                                                 rdf:type owl:Class
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty ValChisone:comprende ;
+                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass ValChisone:Ferrata
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty ValChisone:comprende ;
+                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass ValChisone:SentieroPietraia
+                                                               ]
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty ValChisone:haDislivello ;
+                                                                 owl:someValuesFrom [ rdf:type rdfs:Datatype ;
+                                                                                      owl:onDatatype xsd:integer ;
+                                                                                      owl:withRestrictions ( [ xsd:minExclusive 500
+                                                                                                             ]
+                                                                                                             [ xsd:maxExclusive 1600
+                                                                                                             ]
+                                                                                                           )
+                                                                                    ]
+                                                               ]
+                                                             )
+                                               ] ;
+                           rdfs:subClassOf ValChisone:Escursione ;
+                           rdfs:comment "Escursione di media durata su sentiero roccioso o con ferrata" ;
+                           rdfs:label "EscursioneMedia" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Escursionista
+ValChisone:Escursionista rdf:type owl:Class ;
+                         rdfs:comment "Persona che effettua una camminata più o meno impegnativa in montagna per raggiungere una destinazione" ;
+                         rdfs:label "Escursionista" ;
+                         rdfs:seeAlso "https://dbpedia.org/page/Category:Mountain_climbers" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaCamminatore
+ValChisone:EscursionistaCamminatore rdf:type owl:Class ;
+                                    owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                          owl:onProperty ValChisone:esegue ;
+                                                          owl:someValuesFrom ValChisone:EscursioneMedia
+                                                        ] ;
+                                    rdfs:subClassOf ValChisone:Escursionista ;
+                                    owl:disjointWith ValChisone:EscursionistaEsperto ,
+                                                     ValChisone:EscursionistaPrincipiante ;
+                                    rdfs:comment "Escurisonista di medio livello" ;
+                                    rdfs:label "EscursionistaCamminatore" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaEsperto
+ValChisone:EscursionistaEsperto rdf:type owl:Class ;
+                                owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                      owl:onProperty ValChisone:esegue ;
+                                                      owl:someValuesFrom ValChisone:EscursioneDifficile
+                                                    ] ;
+                                rdfs:subClassOf ValChisone:Escursionista ;
+                                owl:disjointWith ValChisone:EscursionistaPrincipiante ;
+                                rdfs:comment "Escursionista molto abile" ;
+                                rdfs:label "EscursionistaEsperto" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaPrincipiante
+ValChisone:EscursionistaPrincipiante rdf:type owl:Class ;
+                                     owl:equivalentClass [ rdf:type owl:Restriction ;
+                                                           owl:onProperty ValChisone:esegue ;
+                                                           owl:someValuesFrom ValChisone:EscursioneFacile
+                                                         ] ;
+                                     rdfs:subClassOf ValChisone:Escursionista ;
+                                     rdfs:comment "Escursionista di basso livello" ;
+                                     rdfs:label "EscursionistaPrincipiante" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Facile
+ValChisone:Facile rdf:type owl:Class ;
+                  owl:equivalentClass [ rdf:type owl:Class ;
+                                        owl:oneOf ( ValChisone:T
+                                                  )
+                                      ] ;
+                  rdfs:subClassOf ValChisone:Difficoltà ;
+                  rdfs:comment "Livello di difficoltà basso, comprende solo sentieri e livelli T, E" ;
+                  rdfs:label "Facile" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Ferrata
+ValChisone:Ferrata rdf:type owl:Class ;
+                   rdfs:subClassOf ValChisone:Percorso ;
+                   rdfs:comment "Via caratterizzata dalla presenza di strutture e attrezzature realizzate artificialmente su una parete rocciosa per facilitarne la salita in sicurezza" ;
+                   rdfs:label "Ferrata" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Fontana
+ValChisone:Fontana rdf:type owl:Class ;
+                   rdfs:comment "Dispositivo architettonico che versa l'acqua, permette di attingerne per abbeverarsi" ;
+                   rdfs:label "Fontana" ;
+                   rdfs:seeAlso "https://dbpedia.org/page/Fountain" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Lago
+ValChisone:Lago rdf:type owl:Class ;
+                rdfs:subClassOf ValChisone:Destinazione ;
+                rdfs:comment "Massa d'aqua stabile" ;
+                rdfs:label "Lago" ;
+                rdfs:seeAlso "https://dbpedia.org/ontology/Lake" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#LocalitàPartenza
+ValChisone:LocalitàPartenza rdf:type owl:Class ;
+                            rdfs:comment "Località di partenza del percorso" ;
+                            rdfs:label "LocalitàPartenza" ;
+                            rdfs:seeAlso "https://dbpedia.org/ontology/routeStartLocation" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Media
+ValChisone:Media rdf:type owl:Class ;
+                 owl:equivalentClass [ rdf:type owl:Class ;
+                                       owl:oneOf ( ValChisone:E
+                                                   ValChisone:EE
+                                                   ValChisone:EEA
+                                                   ValChisone:EEA-F
+                                                 )
+                                     ] ;
+                 rdfs:subClassOf ValChisone:Difficoltà ;
+                 rdfs:comment "Livello di difficoltà medio, comprende Ferrata e livelli EE, EEA, EEA-F" ;
+                 rdfs:label "Media" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ParcoNaturale
+ValChisone:ParcoNaturale rdf:type owl:Class ;
+                         rdfs:comment "Luogo protetto per la salaguardia di flora e fauna in cui è vietata la caccia e altre attività" ;
+                         rdfs:label "ParcoNaturale" ;
+                         rdfs:seeAlso "https://dbpedia.org/page/Nature_park" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Percorso
+ValChisone:Percorso rdf:type owl:Class ;
+                    rdfs:comment "tracciato percorribile a piedi, indicato con apposita segnaletica" ;
+                    rdfs:label "Percorso" ;
+                    rdfs:seeAlso "https://dbpedia.org/page/Trail" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Rifugio
+ValChisone:Rifugio rdf:type owl:Class ;
+                   rdfs:subClassOf ValChisone:Destinazione ;
+                   rdfs:comment "Edificio collocato in zone montane, di solito lontano dai centri abitati, destinato a ospitare gli alpinisti e gli escursionisti che frequentano la montagna" ;
+                   rdfs:label "Rifugio" ;
+                   rdfs:seeAlso "https://dbpedia.org/page/Mountain_hut" ;
+                   skos:Concept <https://schema.gov.it/lodview/onto/ACCO/AccommodationTypology> ;
+                   skos:prefLabel "Rifugio"@it .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#RifugioPernottamento
+ValChisone:RifugioPernottamento rdf:type owl:Class ;
+                                rdfs:subClassOf ValChisone:Rifugio ;
+                                rdfs:comment "Rifugio Alpino con possibilità di pernottamento" ;
+                                rdfs:label "RifugioPernottamento" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Sentiero
+ValChisone:Sentiero rdf:type owl:Class ;
+                    rdfs:subClassOf ValChisone:Percorso ;
+                    rdfs:comment "Via stretta a fondo naturale tracciata dal frequente passaggio di uomini e animali, tra terreni, boschi o rocce." ;
+                    rdfs:label "Sentiero" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroBattuto
+ValChisone:SentieroBattuto rdf:type owl:Class ;
+                           rdfs:subClassOf ValChisone:Sentiero ;
+                           owl:disjointWith ValChisone:SentieroPietraia ;
+                           rdfs:comment "Sentiero semplice privo di difficoltà" ;
+                           rdfs:label "SentieroBattuto" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroPietraia
+ValChisone:SentieroPietraia rdf:type owl:Class ;
+                            rdfs:subClassOf ValChisone:Sentiero ;
+                            rdfs:comment "Sentiero su pietraia" ;
+                            rdfs:label "SentieroPietraia" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Sorgente
+ValChisone:Sorgente rdf:type owl:Class ;
+                    rdfs:subClassOf ValChisone:Destinazione ;
+                    rdfs:comment "Sorgente di fiume situata su una montagna" ;
+                    rdfs:label "Sorgente" ;
+                    rdfs:seeAlso "https://dbpedia.org/page/River_source" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Valle
+ValChisone:Valle rdf:type owl:Class ;
+                 rdfs:comment "Zona depressa di paesaggio terrestre che si estende tra due pendici montuose" ;
+                 rdfs:isDefinedBy <http://www.ontologydesignpatterns.org/cp/owl/place.owl> ;
+                 rdfs:label "Valle" .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Vetta
+ValChisone:Vetta rdf:type owl:Class ;
+                 rdfs:subClassOf ValChisone:Destinazione ;
+                 rdfs:comment "Cima della montagna" ;
+                 rdfs:label "Vetta" ;
+                 rdfs:seeAlso "https://dbpedia.org/page/Category:Mountains" .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Alpi
+ValChisone:Alpi rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Bastoncini
+ValChisone:Bastoncini rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Borraccia
+ValChisone:Borraccia rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Camoscio
+ValChisone:Camoscio rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Cervo
+ValChisone:Cervo rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#E
+ValChisone:E rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EAI
+ValChisone:EAI rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EE
+ValChisone:EE rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EEA
+ValChisone:EEA rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EEA-D
+ValChisone:EEA-D rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EEA-F
+ValChisone:EEA-F rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EEA-PD
+ValChisone:EEA-PD rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EquipaggiamentoEsperto
+ValChisone:EquipaggiamentoEsperto rdf:type owl:NamedIndividual ;
+                                  ValChisone:hasMember ValChisone:Bastoncini ,
+                                                       ValChisone:Borraccia ,
+                                                       ValChisone:Imbragatura ,
+                                                       ValChisone:IndumentiTermici ,
+                                                       ValChisone:Kway ,
+                                                       ValChisone:MappaGPS ,
+                                                       ValChisone:Ramponi ,
+                                                       ValChisone:Scarponi ,
+                                                       ValChisone:Zaino .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EquipaggiamentoMedio
+ValChisone:EquipaggiamentoMedio rdf:type owl:NamedIndividual ;
+                                ValChisone:hasMember ValChisone:Bastoncini ,
+                                                     ValChisone:Borraccia ,
+                                                     ValChisone:Kway ,
+                                                     ValChisone:Scarponi ,
+                                                     ValChisone:Zaino .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EquipaggiamentoSemplice
+ValChisone:EquipaggiamentoSemplice rdf:type owl:NamedIndividual ;
+                                   ValChisone:hasMember ValChisone:Borraccia ,
+                                                        ValChisone:Kway ,
+                                                        ValChisone:ScarpeGinnastica ,
+                                                        ValChisone:Zaino .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscBeth
+ValChisone:EscBeth rdf:type owl:NamedIndividual ;
+                   ValChisone:comprende ValChisone:SentieroGhinivert ;
+                   ValChisone:eseguitaDa ValChisone:EscMonteGhinivert ;
+                   ValChisone:haDifficoltà ValChisone:E ;
+                   ValChisone:haDislivello 1200 ;
+                   ValChisone:haTempoPercorrenza 3.0 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscLagoLaux
+ValChisone:EscLagoLaux rdf:type owl:NamedIndividual ;
+                       ValChisone:comprende ValChisone:SentieroLagoLaux ;
+                       ValChisone:eseguitaDa ValChisone:EscursionistaLagoLaux ;
+                       ValChisone:haDifficoltà ValChisone:T ;
+                       ValChisone:haDislivello 288 ;
+                       ValChisone:haTempoPercorrenza 2.0 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscMonteAlbergian
+ValChisone:EscMonteAlbergian rdf:type owl:NamedIndividual ;
+                             ValChisone:comprende ValChisone:SentieroAlbergian ;
+                             ValChisone:eseguitaDa ValChisone:EscursionistaMonteAlbergian ;
+                             ValChisone:haDifficoltà ValChisone:E ;
+                             ValChisone:haDislivello 1523 ;
+                             ValChisone:haTempoPercorrenza 3.0 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscMonteGhinivert
+ValChisone:EscMonteGhinivert rdf:type owl:NamedIndividual ;
+                             ValChisone:comprende ValChisone:PietraiaGhinivert ;
+                             ValChisone:eseguitaDa ValChisone:EscursionistaMonteGhinivert ;
+                             ValChisone:haDifficoltà ValChisone:EE ;
+                             ValChisone:haDislivello 1300 ;
+                             ValChisone:haTempoPercorrenza 4.0 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscSelleries
+ValChisone:EscSelleries rdf:type owl:NamedIndividual ;
+                        ValChisone:comprende ValChisone:SentieroSelleries ;
+                        ValChisone:eseguitaDa ValChisone:EscursionistaSelleries ;
+                        ValChisone:haDifficoltà ValChisone:T ;
+                        ValChisone:haDislivello 365 ;
+                        ValChisone:haTempoPercorrenza 1.5 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaLagoLaux
+ValChisone:EscursionistaLagoLaux rdf:type owl:NamedIndividual ;
+                                 ValChisone:esegue ValChisone:EscLagoLaux ;
+                                 ValChisone:haEtà 15 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaMonteAlbergian
+ValChisone:EscursionistaMonteAlbergian rdf:type owl:NamedIndividual ;
+                                       ValChisone:esegue ValChisone:EscMonteAlbergian ;
+                                       ValChisone:haEtà 28 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaMonteGhinivert
+ValChisone:EscursionistaMonteGhinivert rdf:type owl:NamedIndividual ;
+                                       ValChisone:esegue ValChisone:EscMonteGhinivert ;
+                                       ValChisone:haEtà 28 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#EscursionistaSelleries
+ValChisone:EscursionistaSelleries rdf:type owl:NamedIndividual ;
+                                  ValChisone:esegue ValChisone:EscSelleries ;
+                                  ValChisone:haEtà 10 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Fenestrelle
+ValChisone:Fenestrelle rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Imbragatura
+ValChisone:Imbragatura rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#IndumentiTermici
+ValChisone:IndumentiTermici rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Kway
+ValChisone:Kway rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#LagoLaux
+ValChisone:LagoLaux rdf:type owl:NamedIndividual ,
+                             ValChisone:Lago ;
+                    ValChisone:haAltitudine 1381 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Laval
+ValChisone:Laval rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#MappaGPS
+ValChisone:MappaGPS rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ParcoNaturaleOrsieraRocciavrè
+ValChisone:ParcoNaturaleOrsieraRocciavrè rdf:type owl:NamedIndividual ;
+                                         ValChisone:isLocationOf ValChisone:ValChisone .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ParcoNaturaleValTroncea
+ValChisone:ParcoNaturaleValTroncea rdf:type owl:NamedIndividual ;
+                                   ValChisone:isLocationOf ValChisone:ValTroncea .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#PietraiaGhinivert
+ValChisone:PietraiaGhinivert rdf:type owl:NamedIndividual ,
+                                      ValChisone:SentieroPietraia ;
+                             ValChisone:arrivaA ValChisone:VettaGhinivert ;
+                             ValChisone:necessitaAttrezzatura ValChisone:EquipaggiamentoMedio ;
+                             ValChisone:parteDa ValChisone:RifugioBeth .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Pragelato_Rua
+ValChisone:Pragelato_Rua rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Ramponi
+ValChisone:Ramponi rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#RifugioBeth
+ValChisone:RifugioBeth rdf:type owl:NamedIndividual ,
+                                ValChisone:RifugioPernottamento ;
+                       ValChisone:haAltitudine 2800 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#RifugioSelleries
+ValChisone:RifugioSelleries rdf:type owl:NamedIndividual ,
+                                     ValChisone:Rifugio ;
+                            ValChisone:faParteParco ValChisone:ParcoNaturaleOrsieraRocciavrè ;
+                            ValChisone:haAltitudine 2035 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SanatoriePracatinat
+ValChisone:SanatoriePracatinat rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ScarpeGinnastica
+ValChisone:ScarpeGinnastica rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Scarponi
+ValChisone:Scarponi rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroAlbergian
+ValChisone:SentieroAlbergian rdf:type owl:NamedIndividual ,
+                                      ValChisone:SentieroBattuto ;
+                             ValChisone:arrivaA ValChisone:VettaAlbergian ;
+                             ValChisone:necessitaAttrezzatura ValChisone:EquipaggiamentoMedio ;
+                             ValChisone:parteDa ValChisone:Pragelato_Rua .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroGhinivert
+ValChisone:SentieroGhinivert rdf:type owl:NamedIndividual ,
+                                      ValChisone:SentieroBattuto ;
+                             ValChisone:arrivaA ValChisone:RifugioBeth ;
+                             ValChisone:contiene <http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#FontanaTroncea(Ghinivert)> ;
+                             ValChisone:necessitaAttrezzatura ValChisone:EquipaggiamentoMedio ;
+                             ValChisone:parteDa ValChisone:Laval .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroLagoLaux
+ValChisone:SentieroLagoLaux rdf:type owl:NamedIndividual ,
+                                     ValChisone:SentieroBattuto ;
+                            ValChisone:arrivaA ValChisone:LagoLaux ;
+                            ValChisone:necessitaAttrezzatura ValChisone:EquipaggiamentoSemplice ;
+                            ValChisone:parteDa ValChisone:Fenestrelle .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#SentieroSelleries
+ValChisone:SentieroSelleries rdf:type owl:NamedIndividual ,
+                                      ValChisone:SentieroBattuto ;
+                             ValChisone:arrivaA ValChisone:RifugioSelleries ;
+                             ValChisone:necessitaAttrezzatura ValChisone:EquipaggiamentoSemplice ;
+                             ValChisone:parteDa ValChisone:SanatoriePracatinat .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Stambecco
+ValChisone:Stambecco rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#T
+ValChisone:T rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ValChisone
+ValChisone:ValChisone rdf:type owl:NamedIndividual ;
+                      ValChisone:ospita ValChisone:Cervo ,
+                                        ValChisone:Stambecco .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#ValTroncea
+ValChisone:ValTroncea rdf:type owl:NamedIndividual ;
+                      ValChisone:ospita ValChisone:Camoscio ,
+                                        ValChisone:Cervo ,
+                                        ValChisone:Stambecco .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#VettaAlbergian
+ValChisone:VettaAlbergian rdf:type owl:NamedIndividual ;
+                          ValChisone:faParteCatena ValChisone:Alpi ;
+                          ValChisone:haAltitudine 3041 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#VettaGhinivert
+ValChisone:VettaGhinivert rdf:type owl:NamedIndividual ;
+                          ValChisone:faParteCatena ValChisone:Alpi ;
+                          ValChisone:faParteParco ValChisone:ParcoNaturaleValTroncea ;
+                          ValChisone:haAltitudine 3037 .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#Zaino
+ValChisone:Zaino rdf:type owl:NamedIndividual .
+
+
+###  http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#FontanaTroncea(Ghinivert)
+<http://www.semanticweb.org/u388883/ontologies/2024/0/ValChisone#FontanaTroncea(Ghinivert)> rdf:type owl:NamedIndividual ;
+                                                                                            rdfs:label "FontanaTroncea(Ghinivert)" .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
